@@ -1,0 +1,36 @@
+<!--
+  Generated template for the AddtodoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Add Task</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <p style="padding:0px 10px 10px 15px; color:gray;">Let's add a new task item! Only fill out the areas that you want. In other words, none of the fields are required.</p>
+  <ion-item style="margin-top:-22px">
+      <ion-label floating><ion-icon ios="ios-checkbox" name="checkmark" style="color:#4989FF;"></ion-icon> Task <span style="color:lightgray">e.g. Coding Project</span></ion-label>
+      <ion-input [(ngModel)]="todo.Title"></ion-input>
+  </ion-item>
+
+  <ion-item>
+      <ion-label floating><ion-icon name="chatboxes" style="color:#4989FF;"></ion-icon> Description <span style="color:lightgray">e.g. Create a web app <br> using JavaScript...</span></ion-label>
+      <ion-textarea fz-elastic [(ngModel)]="todo.Desc"></ion-textarea>
+  </ion-item>
+  <ion-item>
+      <ion-label floating><ion-icon name="folder" style="color:#4989FF;"></ion-icon> Category <span style="color:lightgray">e.g. coding</span></ion-label>
+      <ion-input autocomplete="true" spellcheck="true"  [(ngModel)]="todo.Cat"></ion-input>
+  </ion-item>
+
+
+  <button ion-button block style="margin-top:50px" (click)="createToDo()">Add Task</button>
+
+
+</ion-content>

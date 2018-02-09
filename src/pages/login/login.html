@@ -1,0 +1,33 @@
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:200" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+</head>
+<ion-header>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <img src="https://s3.amazonaws.com/ionic-app-imgs/logo2.svg" style="width:60px; margin-top:100px; margin-left: auto; margin-right: auto; display: block;"/>
+
+  <div style="text-align:center; margin-top:8px; ">
+    <h2 style="font-family: 'Lobster', cursive;">ToDoWare</h2>
+    <p style="font-family: 'Raleway', sans-serif; margin-top:-10px; font-weight:bold;">Software For Productivity</p>
+  </div>
+
+  <ion-item style="margin-top:-10px;">
+    <ion-label floating>Email Address</ion-label>
+    <ion-input type="email" [(ngModel)]="user.email"></ion-input>
+  </ion-item>
+
+
+  <ion-item>
+    <ion-label floating>Password</ion-label>
+    <ion-input type="password" [(ngModel)]="user.password"></ion-input>
+  </ion-item>
+
+    <button ion-button block (click)="login(user)" style="margin-top:30px">Login</button>
+    <button ion-button full clear (click)="register()" style="margin-top:10px">Register</button>
+
+</ion-content>

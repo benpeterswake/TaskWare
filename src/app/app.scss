@@ -14,3 +14,8 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+body{
+  background: url('https://s3.amazonaws.com/ionic-app-imgs/giphy.gif') no-repeat center;
+  background-size: 70%;
+}

@@ -1,0 +1,45 @@
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:200" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+</head>
+<ion-header>
+  <ion-navbar color="primary">
+      <ion-title><h4 style="font-family: 'Lobster', cursive;">ToDoWare</h4></ion-title>
+  </ion-navbar>
+  <div class="_header" style="text-align:center;">
+    <p>Create an account!</p>
+  </div>
+</ion-header>
+
+
+<ion-content padding>
+
+      <ion-item style="margin-top:-10px">
+          <ion-label floating>First Name</ion-label>
+          <ion-input type="text" [(ngModel)]="profile.firstName" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+          <ion-label floating>Last Name</ion-label>
+          <ion-input type="text" [(ngModel)]="profile.lastName" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Email Address</ion-label>
+        <ion-input type="email" [(ngModel)]="user.email"></ion-input>
+      </ion-item>
+
+      <!--  <ion-item>
+          <ion-label floating>Phone Number</ion-label>
+          <ion-input type="tel" minlength="10" maxlength="10" [(ngModel)]="profile.phone"></ion-input>
+      </ion-item> !-->
+
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" minlength="6" [(ngModel)]="user.password"></ion-input>
+      </ion-item>
+
+      <button ion-button block (click)="register(user)" style="margin-top:30px">Register</button>
+      <button ion-button full clear (click)="loginPage()" style="margin-top:10px">Already a user? Sign In</button>
+
+</ion-content>

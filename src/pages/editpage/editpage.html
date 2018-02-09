@@ -1,0 +1,28 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Edit Task</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-item>
+    <ion-label floating><ion-icon ios="ios-checkbox" name="checkmark" style="color:#4989FF;"></ion-icon> Task</ion-label>
+    <ion-input #title [ngModel]="(todoDataRef$ | async)?.Title"></ion-input>
+ </ion-item>
+
+  <ion-item>
+      <ion-label floating><ion-icon name="chatboxes" style="color:#4989FF;"></ion-icon> Description</ion-label>
+      <ion-textarea fz-elastic text-wrap #desc [ngModel]="(todoDataRef$ | async)?.Desc"></ion-textarea>
+  </ion-item>
+  <ion-item>
+      <ion-label floating><ion-icon name="folder" style="color:#4989FF;"></ion-icon> Category</ion-label>
+      <ion-input #cat [ngModel]="(todoDataRef$ | async)?.Cat"></ion-input>
+  </ion-item>
+
+    <button style="margin-top:50px;" ion-button block (click)="editTodoItem({Title: title.value, Desc: desc.value, Cat: cat.value})">Edit Task</button>
+
+</ion-content>

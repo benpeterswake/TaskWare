@@ -1,11 +1,42 @@
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:200" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+</head>
+
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      About
-    </ion-title>
+
+  <ion-navbar color="primary">
+
+
+        <ion-title><h4 style="font-family: 'Lobster', cursive;">ToDoWare</h4></ion-title>
+
+    <ion-buttons end>
+
+      <button ion-button icon-only (click)="addtodo()">
+          <ion-icon name="add"></ion-icon>
+      </button>
+
+    </ion-buttons>
   </ion-navbar>
+
 </ion-header>
 
-<ion-content padding>
+<ion-content>
+  <!--<ion-searchbar type="text" placeholder="Search" (ionInput)="getItems($event)"></ion-searchbar>!-->
+
+  <ion-item-group>
+      <ion-item-divider>TASKS</ion-item-divider>
+       <ion-item *ngIf="(todoDataRef$ | async)?.length==0" style="color:white; text-align:center; background-color:lightgray;">No tasks..</ion-item>
+       <ion-item *ngFor="let item of todoDataRef$ | async"  text-wrap no-lines>
+         <ion-icon (click)="selectTodoItem(item)" name="list" class="ios-icon" item-start></ion-icon>
+           <h2 (click)="selectTodoItem(item)" style="color:black; font-weight:bold; font-size:18px; text-transform: capitalize;">{{item.Title}}</h2>
+           <h3 (click)="selectTodoItem(item)" style="font-size:15px;">{{item.Desc}}</h3>
+           <h3 (click)="selectTodoItem(item)" *ngIf="(item.Date)?.length != null"><ion-icon name="calendar" style="padding:3px; color:gray"></ion-icon> <span style="color:#488AFF;">{{item.Date |  date:'MMM/dd/yyyy'}}</span></h3>
+           <span *ngIf="(item.Cat)?.length != null"><button ion-button outline style="color:#488AFF;"><ion-icon name="folder" style="padding:3px"></ion-icon>{{item.Cat}}</button></span>
+       </ion-item>
+       <button ion-button clear full (click)="addtodo()" style="margin-top:30px;">+ ADD TASK</button>
+       <div style="padding:25px;"></div>
+   </ion-item-group>
+
 
 </ion-content>

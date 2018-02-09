@@ -1,17 +1,66 @@
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:200" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+</head>
 <ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
+  <ion-navbar color="primary">
+        <ion-title><h4 style="font-family: 'Lobster', cursive;">ToDoWare</h4></ion-title>
   </ion-navbar>
+
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+
+  <ion-item-divider>USER PROFILE
+  </ion-item-divider>
+  <ion-list>
+      <ion-item no-lines>
+        <ion-avatar item-start *ngIf="image">
+          <img [src]="image"/>
+        </ion-avatar>
+        <ion-avatar item-start *ngIf="!image">
+          <img src="https://s3.amazonaws.com/ionic-app-imgs/User_Circle.png"/>
+        </ion-avatar>
+
+        <h2 style="color:#488AFF;">Welcome</h2>
+        <h2 style="text-transform: capitalize">{{(profileData | async)?.firstName}} {{(profileData | async)?.lastName}}</h2>
+
+
+      </ion-item>
+      <button ion-button block (click)="updateProfile()">
+      Account Settings
+      </button>
+
+  </ion-list>
+
+    <ion-item-divider>OVERVIEW</ion-item-divider>
+    <ion-item no-lines>
+         <p style="text-align:center;">You have <span style="color:#488AFF;">{{(todoDataRef$ | async)?.length}}</span> item<span *ngIf="(todoDataRef$ | async)?.length == 0 || (todoDataRef$ | async)?.length > 1">s</span> left!</p>
+       <ion-card-content text-wrap>
+          <ion-item *ngIf="(todoDataRef$ | async)?.length==0" style="color:gray; text-align:center;"><ion-icon style="font-size:25px;" name="done-all"></ion-icon> All Done</ion-item>
+         <ion-item *ngFor="let item of todoDataRef$ | async |  slice:0:2; let i=index">
+           <h2 style="color:black; font-weight:bold; font-size:18px; text-transform: capitalize;"> {{ item.Title }} </h2>
+           <h3  style="font-size:15px; color:#202020">{{ item.Desc }}</h3>
+           <h3 *ngIf="(item.Date)?.length != null"><ion-icon name="calendar" style="padding:3px; color:gray"></ion-icon> <span style="color:#488AFF;">{{item.Date |  date:'MMM/dd/yyyy'}}</span></h3>
+           <span *ngIf="(item.Cat)?.length != null"><button ion-button outline style="color:#488AFF;"><ion-icon name="folder" style="padding:3px"></ion-icon>{{item.Cat}}</button></span>
+         </ion-item>
+          <button ion-button block outline (click)="switchTabs()">View All</button>
+       </ion-card-content>
+
+     </ion-item>
+
+     <ion-item-divider class="pad">ANALYTICS: <span style="color:#488AFF;padding-right:10px;">
+         {{this.year}}
+       </span>
+       <span id="target" style="color:#488AFF;float:right;padding-right:10px;" (click)="refreshChart(target)">
+         <i class="fas fa-sync-alt"></i> REFRESH
+       </span>
+     </ion-item-divider>
+     <ion-item no-lines>
+       <canvas #lineCanvas></canvas>
+      </ion-item>
+
+     <button ion-button clear block style="color:lightgray;">Version 1.0</button>
+
+
 </ion-content>

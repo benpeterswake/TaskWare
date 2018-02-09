@@ -1,0 +1,91 @@
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <style>
+    .diag{
+      position: absolute;
+      z-index: 1;
+      width: 100%;
+      top:0;
+      height:66%;
+    }
+
+    ion-icon{
+      margin-top: 40%;
+      font-size: 8em;
+      color: #4A8BFC;
+    }
+    h2{
+      margin-top: 55%;
+      font-weight: bolder;
+      font-size: 1.3em;
+    }
+    p{
+      display:block;
+      width:250px;
+      margin: 0 auto;
+      font-size:.9em;
+    }
+
+    #skip{
+      position: absolute;
+      bottom: 20px;
+      font-weight: bold;
+      width: 100%;
+      background: none!important;
+      text-align: center;
+      z-index: 5;
+
+    }
+
+    </style>
+</head>
+<ion-content>
+
+  <ion-slides pager (ionSlideDidChange)="slideChanged()">
+
+    <ion-slide>
+      <div class="diag">
+      <img src="https://s3.amazonaws.com/ionic-app-imgs/img2.jpg" style="width:250px; margin-top: 15%; margin-left: auto; margin-right: auto; display: block;"/>
+      </div>
+       <div>
+         <h2>Welcome to <span style="font-family: 'Lobster', cursive;">ToDoWare</span>!</h2>
+         <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <div class="diag">
+          <img src="https://s3.amazonaws.com/ionic-app-imgs/img3.png" style="width:250px; margin-top: 15%; margin-left: auto; margin-right: auto; display: block;"/>
+      </div>
+       <div>
+         <h2>What Can It Do?</h2>
+         <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <div class="diag">
+      <img src="https://s3.amazonaws.com/ionic-app-imgs/img4.png" style="width:250px; margin-top: 15%; margin-left: auto; margin-right: auto; display: block;"/>
+      </div>
+       <div>
+         <h2>Saved to the Cloud!</h2>
+         <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <div class="diag">
+        <ion-icon ios="ios-clipboard" md="md-clipboard"></ion-icon>
+      </div>
+       <div>
+         <h2>Get Started!</h2>
+         <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+      </div>
+    </ion-slide>
+
+  </ion-slides>
+
+      <button ion-button clear (click)="skip()" id="skip">{{ skipMsg }}</button>
+</ion-content>
