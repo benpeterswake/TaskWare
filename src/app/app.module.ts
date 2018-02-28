@@ -18,6 +18,8 @@ import { ProfilePage } from '../pages/profile/profile';
 import { RegisterPage } from '../pages/register/register';
 import { AddtodoPage } from '../pages/addtodo/addtodo';
 import { SuccessPage } from '../pages/success/success';
+import { PrivacyPage } from '../pages/privacy/privacy';
+import { CalendarPage } from '../pages/calendar/calendar';
 
 import { File } from '@ionic-native/file';
 import { FileChooser } from '@ionic-native/file-chooser';
@@ -25,6 +27,8 @@ import { Camera } from '@ionic-native/camera';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { IonicStorageModule } from '@ionic/storage';
+import { CalendarModule } from 'angular-calendar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -38,16 +42,20 @@ import { IonicStorageModule } from '@ionic/storage';
     RegisterPage,
     ProfilePage,
     AddtodoPage,
-    SuccessPage
+    SuccessPage,
+    CalendarPage,
+    PrivacyPage
   ],
   imports: [
     BrowserModule,
     IonicStorageModule.forRoot(),
-    IonicModule.forRoot(MyApp, {tabsHideOnSubPages: true}),
+    BrowserAnimationsModule,
+    CalendarModule.forRoot(),
+    IonicModule.forRoot(MyApp, {tabsHideOnSubPages: true, scrollAssist: false, autoFocusAssist: false}),
     AngularFireModule.initializeApp(FIREBASE_CRED),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    ElasticModule
+    ElasticModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -61,7 +69,9 @@ import { IonicStorageModule } from '@ionic/storage';
     RegisterPage,
     ProfilePage,
     AddtodoPage,
-    SuccessPage
+    SuccessPage,
+    CalendarPage,
+    PrivacyPage
   ],
   providers: [
     StatusBar,

@@ -7,8 +7,7 @@
 
   <ion-navbar color="primary">
 
-
-        <ion-title><h4 style="font-family: 'Lobster', cursive;">ToDoWare</h4></ion-title>
+    <ion-title><h4 style="font-family: 'Lobster', cursive;">TaskWare</h4></ion-title>
 
     <ion-buttons end>
 
@@ -29,7 +28,7 @@
        <ion-item *ngIf="(todoDataRef$ | async)?.length==0" style="color:white; text-align:center; background-color:lightgray;">No tasks..</ion-item>
        <ion-item *ngFor="let item of todoDataRef$ | async"  text-wrap no-lines>
          <ion-icon (click)="selectTodoItem(item)" name="list" class="ios-icon" item-start></ion-icon>
-           <h2 (click)="selectTodoItem(item)" style="color:black; font-weight:bold; font-size:18px; text-transform: capitalize;">{{item.Title}}</h2>
+           <h2 (click)="selectTodoItem(item)" style="color:#488aff; font-weight:bold; font-size:18px; text-transform: capitalize;">{{item.Title}}</h2>
            <h3 (click)="selectTodoItem(item)" style="font-size:15px;">{{item.Desc}}</h3>
            <h3 (click)="selectTodoItem(item)" *ngIf="(item.Date)?.length != null"><ion-icon name="calendar" style="padding:3px; color:gray"></ion-icon> <span style="color:#488AFF;">{{item.Date |  date:'MMM/dd/yyyy'}}</span></h3>
            <span *ngIf="(item.Cat)?.length != null"><button ion-button outline style="color:#488AFF;"><ion-icon name="folder" style="padding:3px"></ion-icon>{{item.Cat}}</button></span>

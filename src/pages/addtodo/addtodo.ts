@@ -1,10 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AboutPage } from '../about/about';
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
 import { Todo } from '../../models/todo';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase,  FirebaseListObservable } from 'angularfire2/database';
-import * as moment from 'moment';
 
 @Component({
   selector: 'page-addtodo',

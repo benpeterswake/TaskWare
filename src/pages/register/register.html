@@ -4,7 +4,7 @@
 </head>
 <ion-header>
   <ion-navbar color="primary">
-      <ion-title><h4 style="font-family: 'Lobster', cursive;">ToDoWare</h4></ion-title>
+      <ion-title><h4 style="font-family: 'Lobster', cursive;">TaskWare</h4></ion-title>
   </ion-navbar>
   <div class="_header" style="text-align:center;">
     <p>Create an account!</p>
@@ -13,7 +13,7 @@
 
 
 <ion-content padding>
-
+      <ion-spinner style=" margin-left: auto;margin-right: auto;display: block; padding-bottom:50px" name="bubbles" *ngIf="this.test === true"></ion-spinner>
       <ion-item style="margin-top:-10px">
           <ion-label floating>First Name</ion-label>
           <ion-input type="text" [(ngModel)]="profile.firstName" required></ion-input>
@@ -39,7 +39,7 @@
         <ion-input type="password" minlength="6" [(ngModel)]="user.password"></ion-input>
       </ion-item>
 
-      <button ion-button block (click)="register(user)" style="margin-top:30px">Register</button>
+      <button ion-button block (click)="register(user)" style="margin-top:30px">Sign Up</button>
       <button ion-button full clear (click)="loginPage()" style="margin-top:10px">Already a user? Sign In</button>
 
 </ion-content>

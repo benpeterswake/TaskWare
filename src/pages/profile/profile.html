@@ -37,20 +37,24 @@
 
   <button ion-button block (click)="createProfile({firstName: firstname.value, lastName: lastname.value})" style="margin-top:15px;">Update Profile</button>
 
-  <ion-item-divider style="margin-top:30px">ABOUT</ion-item-divider>
+  <ion-item-divider style="margin-top:25px">ABOUT</ion-item-divider>
 
 <ion-list>
 
 
-    <ion-item>
-    Privacy Policy
+    <ion-item (click)="toPrivacyPage()">
+          Privacy Policy
     <ion-icon item-right icon-only name="arrow-dropright"></ion-icon>
     </ion-item>
-    <ion-item>
-    Developer Website
+     <a style="text-decoration:none; color:gray;" href="#" onclick="window.open('https://d3kbsxvq7os3rv.cloudfront.net/', '_system', 'location=yes'); return false;">
+    <ion-item >
+
+        Developer Website
     <ion-icon item-right icon-only name="arrow-dropright"></ion-icon>
     </ion-item>
-    <ion-item no-lines style="padding-bottom:30px;">
+    </a>
+
+    <ion-item no-lines style="padding-bottom:20px;">
     Version
     <p item-right>1.0</p>
     </ion-item>

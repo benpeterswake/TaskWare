@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams,  ToastController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import firebase from 'firebase';
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
@@ -7,8 +7,8 @@ import { Profile } from '../../models/profile';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { File } from '@ionic-native/file';
 import { Camera } from '@ionic-native/camera';
-import { HomePage } from '../home/home';
 import { SuccessPage } from '../success/success';
+import {PrivacyPage} from '../privacy/privacy';
 declare var window: any;
 
 @Component({
@@ -29,8 +29,7 @@ export class ProfilePage {
     public navParams: NavParams,
     private fileChooser: FileChooser,
     private file: File,
-    private camera: Camera,
-    private toast: ToastController) {
+    private camera: Camera) {
     afAuth.authState.subscribe( user => {
     if (user) { this.userId = user.uid }
       this.ProfileRef$ = this.afDatabase.object(`profile/${user.uid}`);
@@ -41,13 +40,12 @@ export class ProfilePage {
     }
 
   choose(){
-
     const options = {
       sourceType:this.camera.PictureSourceType.PHOTOLIBRARY,
       mediaType:this.camera.MediaType.ALLMEDIA,
       destinationType:this.camera.DestinationType.DATA_URL
     }
-    let res = this.camera.getPicture(options).then(fileuri => {
+    this.camera.getPicture(options).then(fileuri => {
       window.resolveLocalFileSystemURL("file://"+fileuri,FE => {
         FE.file(file=> {
           const FR = new FileReader()
@@ -77,6 +75,10 @@ export class ProfilePage {
   createProfile(profile: Profile) {
   this.ProfileRef$.update(profile);
   this.navCtrl.pop();
+  }
+
+  toPrivacyPage(){
+    this.navCtrl.push(PrivacyPage);
   }
 
 

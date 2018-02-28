@@ -1,12 +1,10 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Profile } from './../../models/profile';
-import { Completed } from './../../models/completed';
 import { Todo } from '../../models/todo';
 import { NavController, ToastController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseObjectObservable,  FirebaseListObservable } from 'angularfire2/database';
 import { ProfilePage } from '../profile/profile';
-import { AddtodoPage } from '../addtodo/addtodo';
 import { Chart } from 'chart.js';
 import firebase from 'firebase';
 import "rxjs/Rx";
@@ -46,9 +44,11 @@ export class HomePage {
       //Chart Data
       this.items = firebase.database().ref(`completed/${auth.uid}/${this.year}`).orderByKey();
       this.items.on("value", (snapshot) => {
+        // clear array after each refresh
         this.xArray.splice(0,this.xArray.length);
         this.yArray.splice(0,this.yArray.length);
           snapshot.forEach((childSnapshot) => {
+            // add new data to arrays
             this.xArray.push(childSnapshot.key);
             this.yArray.push(childSnapshot.val());
             });
@@ -58,25 +58,6 @@ export class HomePage {
   }
 
   basicChart(dataKey, dataValue){
-
-    if (this.xArray[0] === "1"){
-      this.xArray[0] = "Jan"
-    }
-    if (this.xArray[1] === "2"){
-      this.xArray[1] = "Feb"
-    }
-    if (this.xArray[2] === "3"){
-      this.xArray[2] = "Mar"
-    }
-    if (this.xArray[3] === "4"){
-      this.xArray[3] = "Apr"
-    }
-    if (this.xArray[4] === "5"){
-      this.xArray[4] = "Jun"
-    }
-    if (this.xArray[5] === "6"){
-      this.xArray[5] = "Jul"
-    }
 
     this.lineChart = new Chart(this.lineCanvas.nativeElement, {
                   type: 'line',
@@ -104,20 +85,23 @@ export class HomePage {
                               data: dataValue,
                               spanGaps: false,
                         }]
-                  }
+                  },
+                  options : {
+                      scales: {
+                        xAxes: [{
+                          scaleLabel: {
+                            display: true,
+                            labelString: 'Month'
+                          }
+                        }],
+                      }
+                    }
               });
               console.log(this.xArray)
               console.log(this.yArray)
   }
 
 
-  async refreshChart() {
-    let res = await this.navCtrl.setRoot(this.navCtrl.getActive().component);
-    if (res) {
-      var element = document.getElementById("target");
-      element.scrollIntoView();
-    }
-  }
   switchTabs() {
     this.navCtrl.parent.select(1);
   }

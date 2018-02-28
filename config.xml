@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>todoapp1337</name>
+    <name>TaskWare</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
     <content src="index.html" />
@@ -20,7 +20,6 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="20000" />
     <platform name="android">
-        <preference name="loadUrlTimeoutValue" value="700000" />
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />
@@ -87,4 +86,5 @@
     <plugin name="cordova-plugin-camera" spec="^4.0.2" />
     <allow-navigation href="http://192.168.1.125:8100" />
     <engine name="android" spec="^7.0.0" />
+    <plugin name="cordova-plugin-inappbrowser" spec="^2.0.2" />
 </widget>

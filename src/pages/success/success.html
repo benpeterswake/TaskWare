@@ -7,8 +7,9 @@
 
 <ion-content>
   <div style="text-align:center; margin-top:51%; padding:10px;">
+    <ion-spinner name="bubbles" *ngIf="this.test === true"></ion-spinner>
     <h4 style="padding:10px; color:#3582DE"><i class="fas fa-check"></i> Photo Ready For Upload!</h4>
-    <p>Tap below to complete the upload</p>
+    <p>Tap below to finish the upload</p>
     <button ion-button round (click)="return()" color="secondary">Finish Upload</button>
   </div>
 </ion-content>

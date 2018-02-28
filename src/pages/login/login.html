@@ -1,19 +1,16 @@
-<head>
-    <link href="https://fonts.googleapis.com/css?family=Raleway:200" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
-</head>
 <ion-header>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding ion-fixed>
 
-  <img src="https://s3.amazonaws.com/ionic-app-imgs/logo2.svg" style="width:60px; margin-top:100px; margin-left: auto; margin-right: auto; display: block;"/>
+  <img src="https://s3.amazonaws.com/ionic-app-imgs/logo.png" style="width:60px; margin-top:100px; margin-left: auto; margin-right: auto; display: block;"/>
 
   <div style="text-align:center; margin-top:8px; ">
-    <h2 style="font-family: 'Lobster', cursive;">ToDoWare</h2>
+    <h2 style="font-family: 'Lobster', cursive;">TaskWare</h2>
     <p style="font-family: 'Raleway', sans-serif; margin-top:-10px; font-weight:bold;">Software For Productivity</p>
+    <ion-spinner style="margin-bottom:10px" name="bubbles" *ngIf="this.test === true"></ion-spinner>
   </div>
 
   <ion-item style="margin-top:-10px;">
@@ -28,6 +25,6 @@
   </ion-item>
 
     <button ion-button block (click)="login(user)" style="margin-top:30px">Login</button>
-    <button ion-button full clear (click)="register()" style="margin-top:10px">Register</button>
+    <button ion-button full clear (click)="register()" style="margin-top:10px">Sign Up</button>
 
 </ion-content>

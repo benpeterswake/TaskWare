@@ -4,7 +4,7 @@
 </head>
 <ion-header>
   <ion-navbar color="primary">
-        <ion-title><h4 style="font-family: 'Lobster', cursive;">ToDoWare</h4></ion-title>
+        <ion-title><h4 style="font-family: 'Lobster', cursive;">TaskWare</h4></ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -35,32 +35,27 @@
 
     <ion-item-divider>OVERVIEW</ion-item-divider>
     <ion-item no-lines>
-         <p style="text-align:center;">You have <span style="color:#488AFF;">{{(todoDataRef$ | async)?.length}}</span> item<span *ngIf="(todoDataRef$ | async)?.length == 0 || (todoDataRef$ | async)?.length > 1">s</span> left!</p>
+         <p style="text-align:center;">You have <span style="color:#488AFF;">{{(todoDataRef$ | async)?.length}}</span> task<span *ngIf="(todoDataRef$ | async)?.length == 0 || (todoDataRef$ | async)?.length > 1">s</span> left!</p>
        <ion-card-content text-wrap>
-          <ion-item *ngIf="(todoDataRef$ | async)?.length==0" style="color:gray; text-align:center;"><ion-icon style="font-size:25px;" name="done-all"></ion-icon> All Done</ion-item>
+          <ion-item *ngIf="(todoDataRef$ | async)?.length==0" style="color:gray; text-align:center;"><ion-icon style="font-size:25px;" name="done-all"></ion-icon> No Tasks</ion-item>
          <ion-item *ngFor="let item of todoDataRef$ | async |  slice:0:2; let i=index">
-           <h2 style="color:black; font-weight:bold; font-size:18px; text-transform: capitalize;"> {{ item.Title }} </h2>
+           <h2 style="color:#488aff; font-weight:bold; font-size:18px; text-transform: capitalize;"> {{ item.Title }} </h2>
            <h3  style="font-size:15px; color:#202020">{{ item.Desc }}</h3>
            <h3 *ngIf="(item.Date)?.length != null"><ion-icon name="calendar" style="padding:3px; color:gray"></ion-icon> <span style="color:#488AFF;">{{item.Date |  date:'MMM/dd/yyyy'}}</span></h3>
            <span *ngIf="(item.Cat)?.length != null"><button ion-button outline style="color:#488AFF;"><ion-icon name="folder" style="padding:3px"></ion-icon>{{item.Cat}}</button></span>
          </ion-item>
-          <button ion-button block outline (click)="switchTabs()">View All</button>
+          <button  *ngIf="(todoDataRef$ | async)?.length==0" ion-button block outline (click)="switchTabs()">Add Task</button>
+          <button  *ngIf="(todoDataRef$ | async)?.length!=0" ion-button block outline (click)="switchTabs()">View All</button>
        </ion-card-content>
 
      </ion-item>
 
-     <ion-item-divider class="pad">ANALYTICS: <span style="color:#488AFF;padding-right:10px;">
+     <ion-item-divider class="pad">ANALYTICS <span style="float:right; color:#488AFF;padding-right:10px;">
          {{this.year}}
-       </span>
-       <span id="target" style="color:#488AFF;float:right;padding-right:10px;" (click)="refreshChart(target)">
-         <i class="fas fa-sync-alt"></i> REFRESH
        </span>
      </ion-item-divider>
      <ion-item no-lines>
        <canvas #lineCanvas></canvas>
-      </ion-item>
-
-     <button ion-button clear block style="color:lightgray;">Version 1.0</button>
-
+     </ion-item>
 
 </ion-content>

@@ -1,28 +1,24 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { ProfilePage } from '../profile/profile';
+
 /**
- * Generated class for the SuccessPage page.
+ * Generated class for the PrivacyPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
 
 @Component({
-  selector: 'page-success',
-  templateUrl: 'success.html',
+  selector: 'page-privacy',
+  templateUrl: 'privacy.html',
 })
-export class SuccessPage {
-  tabBarElement: any;
-  test: any;
+export class PrivacyPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-
   }
 
-  return() {
-    this.test = true;
-    location.reload(false);
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad PrivacyPage');
   }
 
 }

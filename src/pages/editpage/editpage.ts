@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
-import { AboutPage } from '../about/about';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Todo } from './../../models/todo';
 

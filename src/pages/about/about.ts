@@ -6,7 +6,6 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Todo } from './../../models/todo';
 import { EditpagePage } from '../editpage/editpage';
 import { AddtodoPage } from '../addtodo/addtodo';
-import firebase from 'firebase';
 
 
 @Component({
@@ -22,12 +21,15 @@ export class AboutPage{
   selectedDay = new Date();
   month = this.selectedDay.getMonth()+1;
   year = this.selectedDay.getFullYear();
+  monthFormat: any;
 
   constructor(private actionSheetCtrl: ActionSheetController ,public navCtrl: NavController, public navParams: NavParams,
-  private afDatabase: AngularFireDatabase, private afAuth: AngularFireAuth, private toast: ToastController) {
+  private afDatabase: AngularFireDatabase, private afAuth: AngularFireAuth) {
           this.afAuth.authState.take(1).subscribe(auth => {
           this.todoDataRef$ = this.afDatabase.list(`todo/${auth.uid}`);
           });
+          this.monthFormat = (`0${this.month}`)
+
     }
 
     selectTodoItem(todo: Todo){
@@ -43,7 +45,7 @@ export class AboutPage{
              this.todoDataRef$.remove(todo.$key);
             if (this.todoDataRef$.remove(todo.$key)){
               this.afAuth.authState.take(1).subscribe(auth => {
-                  this.afDatabase.object(`completed/${auth.uid}/${this.year}/${this.month}`).$ref
+                  this.afDatabase.object(`completed/${auth.uid}/${this.year}/${this.monthFormat}`).$ref
                   .ref.transaction(completed => {
                       if (completed === null) {
                           return completed = 1;

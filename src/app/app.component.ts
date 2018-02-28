@@ -21,19 +21,31 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
-    });
-    firebase.auth().onAuthStateChanged(user => {
-          if (user) {
-              this.rootPage = TabsPage;
-                  this.toast.create({
-                    message: `Success!`,
-                    duration: 1000,
-                    cssClass: "toast-success"
-                  }).present();
-          } else {
-              this.rootPage = LoginPage;
+      this.afAuth.authState.take(1).subscribe(auth => {
+        if (auth) {
+          this.rootPage = TabsPage;
+          this.toast.create({
+            message: `Success!`,
+            duration: 1000,
+            cssClass: "toast-success"
+          }).present();
+        } else{
+          this.rootPage = LoginPage;
+        }
+        });
 
-          }
-      })
+      firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+        this.rootPage = TabsPage;
+        this.toast.create({
+          message: `Success!`,
+          duration: 1000,
+          cssClass: "toast-success"
+        }).present();
+      } else {
+        this.rootPage = LoginPage;
+      }
+    })
+    });
   }
 }

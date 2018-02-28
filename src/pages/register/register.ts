@@ -17,6 +17,7 @@ export class RegisterPage {
   user = {} as User;
   profile = {} as Profile;
   public Fbref:any;
+  test: any;
 
   constructor(private afAuth: AngularFireAuth , private afDatabase: AngularFireDatabase,
   public navCtrl: NavController,private toast: ToastController, public navParams: NavParams) {
@@ -25,13 +26,15 @@ export class RegisterPage {
 
   async register(user: User){
   try {
+      this.test = true;
       if((this.profile.firstName === undefined || null || 0 === this.profile.firstName.length)
       || (this.profile.lastName === undefined || null ||  0 === this.profile.lastName.length)){
         this.toast.create({
-          message: 'All field are required2',
+          message: 'All fields are required',
           duration: 2500,
           cssClass: "error"
         }).present();
+          this.test = false;
         console.log(this.profile.firstName)
      }else{
        const result = await this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password);
@@ -45,6 +48,7 @@ export class RegisterPage {
      }
    }
    catch(e){
+      this.test = false;
      let errorCode = e.code;
       if (errorCode === 'auth/email-already-in-use') {
         this.toast.create({
