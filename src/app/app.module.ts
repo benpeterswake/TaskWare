@@ -24,6 +24,7 @@ import { CalendarPage } from '../pages/calendar/calendar';
 import { File } from '@ionic-native/file';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { Camera } from '@ionic-native/camera';
+import { Network } from '@ionic-native/network';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { IonicStorageModule } from '@ionic/storage';
@@ -79,6 +80,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FileChooser,
     File,
     Camera,
+    Network,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

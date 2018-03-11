@@ -35,7 +35,7 @@ export class HomePage {
     private afDatabase: AngularFireDatabase, public navCtrl: NavController) {
     this.afAuth.authState.take(1).subscribe(auth => {
       //Todo data
-      this.todoDataRef$ = this.afDatabase.list(`todo/${auth.uid}` );
+      this.todoDataRef$ = this.afDatabase.list(`todo/${auth.uid}`);
       //Profile data
       this.profileData = this.afDatabase.object(`profile/${auth.uid}`);
       //Photo Data
@@ -52,53 +52,53 @@ export class HomePage {
             this.xArray.push(childSnapshot.key);
             this.yArray.push(childSnapshot.val());
             });
-            this.basicChart(this.xArray, this.yArray);
+          this.basicChart(this.xArray, this.yArray);
         });
       });
   }
 
   basicChart(dataKey, dataValue){
-
-    this.lineChart = new Chart(this.lineCanvas.nativeElement, {
-                  type: 'line',
-                  data: {
-                      labels: dataKey,
-                      datasets: [{
-                              label: "Completed",
-                              fill: true,
-                              lineTension: 0.1,
-                              backgroundColor: "rgba(72,138,255,0.4)",
-                              borderColor: "rgba(72,138,255,1)",
-                              borderCapStyle: 'butt',
-                              borderDash: [],
-                              borderDashOffset: 0.0,
-                              borderJoinStyle: 'miter',
-                              pointBorderColor: "rgba(72,138,255,1)",
-                              pointBackgroundColor: "#fff",
-                              pointBorderWidth: 8,
-                              pointHoverRadius: 5,
-                              pointHoverBackgroundColor: "rgba(72,138,255,1)",
-                              pointHoverBorderColor: "rgba(220,220,220,1)",
-                              pointHoverBorderWidth: 2,
-                              pointRadius: 3,
-                              pointHitRadius: 10,
-                              data: dataValue,
-                              spanGaps: false,
-                        }]
-                  },
-                  options : {
-                      scales: {
-                        xAxes: [{
-                          scaleLabel: {
-                            display: true,
-                            labelString: 'Month'
-                          }
-                        }],
+      this.lineChart = new Chart(this.lineCanvas.nativeElement, {
+                    type: 'line',
+                    data: {
+                        labels: dataKey,
+                        datasets: [{
+                                label: "Completed",
+                                fill: true,
+                                lineTension: 0.1,
+                                backgroundColor: "rgba(72,138,255,0.4)",
+                                borderColor: "rgba(72,138,255,1)",
+                                borderCapStyle: 'butt',
+                                borderDash: [],
+                                borderDashOffset: 0.0,
+                                borderJoinStyle: 'miter',
+                                pointBorderColor: "rgba(72,138,255,1)",
+                                pointBackgroundColor: "#fff",
+                                pointBorderWidth: 8,
+                                pointHoverRadius: 5,
+                                pointHoverBackgroundColor: "rgba(72,138,255,1)",
+                                pointHoverBorderColor: "rgba(220,220,220,1)",
+                                pointHoverBorderWidth: 2,
+                                pointRadius: 3,
+                                pointHitRadius: 10,
+                                data: dataValue,
+                                spanGaps: false,
+                          }]
+                    },
+                    options : {
+                        scales: {
+                          xAxes: [{
+                            scaleLabel: {
+                              display: true,
+                              labelString: 'Month'
+                            }
+                          }],
+                        }
                       }
-                    }
-              });
-              console.log(this.xArray)
-              console.log(this.yArray)
+                });
+                console.log(this.xArray)
+                console.log(this.yArray)
+
   }
 
 

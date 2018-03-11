@@ -64,7 +64,7 @@ export class ProfilePage {
       this.afAuth.authState.subscribe( user => {
       if (user) { this.userId = user.uid }
       this.Fbref.child(`${user.uid}/image`).put(blob);
-      });
+      })
       this.navCtrl.push(SuccessPage);
   }
 

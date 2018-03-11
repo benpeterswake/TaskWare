@@ -29,7 +29,6 @@ export class AboutPage{
           this.todoDataRef$ = this.afDatabase.list(`todo/${auth.uid}`);
           });
           this.monthFormat = (`0${this.month}`)
-
     }
 
     selectTodoItem(todo: Todo){
