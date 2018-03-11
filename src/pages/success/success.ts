@@ -17,7 +17,6 @@ export class SuccessPage {
   test: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-
   }
 
   return() {
