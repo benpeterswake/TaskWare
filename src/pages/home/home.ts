@@ -96,8 +96,8 @@ export class HomePage {
                         }
                       }
                 });
-                console.log(this.xArray)
-                console.log(this.yArray)
+                // console.log(this.xArray)
+                // console.log(this.yArray)
 
   }
 
