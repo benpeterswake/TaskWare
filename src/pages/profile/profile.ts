@@ -40,19 +40,21 @@ export class ProfilePage {
     }
 
   choose(){
+
     const options = {
       sourceType:this.camera.PictureSourceType.PHOTOLIBRARY,
       mediaType:this.camera.MediaType.ALLMEDIA,
       destinationType:this.camera.DestinationType.DATA_URL
     }
     this.camera.getPicture(options).then(fileuri => {
-      window.resolveLocalFileSystemURL("file://"+fileuri,FE => {
+      window.resolveLocalFileSystemURL(("file://"+fileuri).toLowerCase(),FE => {
+        this.navCtrl.push(SuccessPage);
         FE.file(file=> {
           const FR = new FileReader()
           FR.onloadend = (res:any) => {
             let AF = res.target.result
-            let blob = new Blob([new Uint8Array(AF)], {type: 'image/jpeg'})
-            this.upload(blob);
+            let blob = new Blob([new Uint8Array(AF)], {type: 'image/jpeg'});
+              this.upload(blob);
           };
           FR.readAsArrayBuffer(file);
         });
@@ -64,8 +66,7 @@ export class ProfilePage {
       this.afAuth.authState.subscribe( user => {
       if (user) { this.userId = user.uid }
       this.Fbref.child(`${user.uid}/image`).put(blob);
-      })
-      this.navCtrl.push(SuccessPage);
+      });
   }
 
   signOut(){

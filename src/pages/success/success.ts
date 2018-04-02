@@ -17,11 +17,14 @@ export class SuccessPage {
   test: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+      this.test = false;
   }
 
   return() {
     this.test = true;
-    location.reload(false);
+    setTimeout(() => {
+      location.reload(false);
+    }, 5500)
   }
 
 }
