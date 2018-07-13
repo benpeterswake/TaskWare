@@ -23,6 +23,6 @@
       <ion-input #cat [ngModel]="(todoDataRef$ | async)?.Cat"></ion-input>
   </ion-item>
 
-    <button style="margin-top:50px;" ion-button block (click)="editTodoItem({Title: title.value, Desc: desc.value, Cat: cat.value})">Edit Task</button>
+    <button style="margin-top:25px;" ion-button block (click)="editTodoItem({Title: title.value, Desc: desc.value, Cat: cat.value})">Edit Task</button>
 
 </ion-content>

@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, NavParams, Navbar } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
-import firebase from 'firebase';
 import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 import { Profile } from '../../models/profile';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { File } from '@ionic-native/file';
 import { Camera } from '@ionic-native/camera';
-import { SuccessPage } from '../success/success';
-import {PrivacyPage} from '../privacy/privacy';
+import { PrivacyPage } from '../privacy/privacy';
+import { HomePage } from '../home/home';
+import * as firebase from 'firebase/app';
+
 declare var window: any;
 
 @Component({
@@ -17,10 +18,12 @@ declare var window: any;
 })
 export class ProfilePage {
 
+  @ViewChild(Navbar) navBar: Navbar;
   profile = {} as Profile;
   ProfileRef$: FirebaseObjectObservable<Profile>;
-  userId;
+  userId: any;
   image: any;
+  progress: any;
   public Fbref:any;
 
   constructor(private afAuth: AngularFireAuth,
@@ -31,7 +34,7 @@ export class ProfilePage {
     private file: File,
     private camera: Camera) {
     afAuth.authState.subscribe( user => {
-    if (user) { this.userId = user.uid }
+    if (user) { this.userId = user.uid; }
       this.ProfileRef$ = this.afDatabase.object(`profile/${user.uid}`);
       let storageRef = firebase.storage().ref().child(`${user.uid}/image`);
       storageRef.getDownloadURL().then(url => this.image = url);
@@ -39,8 +42,13 @@ export class ProfilePage {
       this.Fbref = firebase.storage().ref();
     }
 
-  choose(){
+  ionViewDidLoad() {
+    this.navBar.backButtonClick = (e:UIEvent)=>{
+      this.navCtrl.setRoot(HomePage);
+    }
+  }
 
+  choose(){
     const options = {
       sourceType:this.camera.PictureSourceType.PHOTOLIBRARY,
       mediaType:this.camera.MediaType.ALLMEDIA,
@@ -48,13 +56,12 @@ export class ProfilePage {
     }
     this.camera.getPicture(options).then(fileuri => {
       window.resolveLocalFileSystemURL(("file://"+fileuri).toLowerCase(),FE => {
-        this.navCtrl.push(SuccessPage);
         FE.file(file=> {
           const FR = new FileReader()
           FR.onloadend = (res:any) => {
             let AF = res.target.result
             let blob = new Blob([new Uint8Array(AF)], {type: 'image/jpeg'});
-              this.upload(blob);
+            this.upload(blob);
           };
           FR.readAsArrayBuffer(file);
         });
@@ -63,9 +70,31 @@ export class ProfilePage {
   }
 
   upload(blob: Blob){
-      this.afAuth.authState.subscribe( user => {
-      if (user) { this.userId = user.uid }
-      this.Fbref.child(`${user.uid}/image`).put(blob);
+      this.progress = 1;
+      this.afAuth.authState.subscribe((user) => {
+        if (user) { this.userId = user.uid }
+        let upload = this.Fbref.child(`${user.uid}/image`).put(blob)
+        upload.on('state_changed', (snapshot) =>{
+          this.progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          switch (snapshot.state) {
+            case firebase.storage.TaskState.PAUSED: // or 'paused'
+              console.log('Upload is paused');
+              break;
+            case firebase.storage.TaskState.RUNNING: // or 'running'
+              console.log('Upload is running')
+              break;
+          }
+        }, (error) => {
+          alert("There was an error." + error)
+          // Handle unsuccessful uploads
+        }, () => {
+          // Handle successful uploads on complete
+          upload.snapshot.ref.getDownloadURL().then((url) => {
+            alert("Successful Upload!")
+            this.image = url;
+            this.progress = undefined;
+          });
+        });
       });
   }
 
@@ -74,8 +103,8 @@ export class ProfilePage {
   }﻿
 
   createProfile(profile: Profile) {
-  this.ProfileRef$.update(profile);
-  this.navCtrl.pop();
+    this.ProfileRef$.update(profile);
+    this.navCtrl.setRoot(HomePage);
   }
 
   toPrivacyPage(){

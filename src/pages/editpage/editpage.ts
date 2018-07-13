@@ -25,6 +25,9 @@ export class EditpagePage {
   }
 
   editTodoItem(todo: Todo){
+    if(todo.Cat){
+      todo.Cat = todo.Cat.toUpperCase()
+    }
     this.todoDataRef$.update(todo);
     this.navCtrl.pop();
   }
