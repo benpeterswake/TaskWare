@@ -6,7 +6,6 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
 import { LoginPage } from '../pages/login/login';
 import { TabsPage } from '../pages/tabs/tabs';
-import { Network } from '@ionic-native/network';
 
 @Component({
   templateUrl: 'app.html'
@@ -15,8 +14,7 @@ export class MyApp {
   rootPage:any;
   connected:any;
   constructor(private afAuth: AngularFireAuth, platform: Platform,
-    statusBar: StatusBar, splashScreen: SplashScreen, private toast: ToastController,
-    private network: Network) {
+    statusBar: StatusBar, splashScreen: SplashScreen, private toast: ToastController) {
       platform.ready().then(() => {
         // Okay, so the platform is ready and our plugins are available.
         // Here you can do any higher level native things you might need.
@@ -33,7 +31,7 @@ export class MyApp {
           } else{
             this.rootPage = LoginPage;
           }
-          });
+        });
 
         firebase.auth().onAuthStateChanged(user => {
           if (user) {

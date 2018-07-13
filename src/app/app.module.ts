@@ -17,18 +17,14 @@ import { LoginPage } from '../pages/login/login';
 import { ProfilePage } from '../pages/profile/profile';
 import { RegisterPage } from '../pages/register/register';
 import { AddtodoPage } from '../pages/addtodo/addtodo';
-import { SuccessPage } from '../pages/success/success';
 import { PrivacyPage } from '../pages/privacy/privacy';
-import { CalendarPage } from '../pages/calendar/calendar';
 
 import { File } from '@ionic-native/file';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { Camera } from '@ionic-native/camera';
-import { Network } from '@ionic-native/network';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { IonicStorageModule } from '@ionic/storage';
-import { CalendarModule } from 'angular-calendar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -43,15 +39,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RegisterPage,
     ProfilePage,
     AddtodoPage,
-    SuccessPage,
-    CalendarPage,
-    PrivacyPage
+    PrivacyPage,
   ],
   imports: [
     BrowserModule,
     IonicStorageModule.forRoot(),
     BrowserAnimationsModule,
-    CalendarModule.forRoot(),
     IonicModule.forRoot(MyApp, {tabsHideOnSubPages: true, scrollAssist: false, autoFocusAssist: false}),
     AngularFireModule.initializeApp(FIREBASE_CRED),
     AngularFireDatabaseModule,
@@ -70,8 +63,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RegisterPage,
     ProfilePage,
     AddtodoPage,
-    SuccessPage,
-    CalendarPage,
     PrivacyPage
   ],
   providers: [
@@ -80,7 +71,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FileChooser,
     File,
     Camera,
-    Network,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

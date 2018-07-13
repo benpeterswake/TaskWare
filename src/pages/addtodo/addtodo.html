@@ -15,6 +15,7 @@
 
 <ion-content padding>
   <p style="padding:0px 10px 10px 15px; color:gray;">Let's add a new task item! Only fill out the areas that you want. In other words, none of the fields are required.</p>
+
   <ion-item style="margin-top:-22px">
       <ion-label floating><ion-icon ios="ios-checkbox" name="checkmark" style="color:#4989FF;"></ion-icon> Task <span style="color:lightgray">e.g. Coding Project</span></ion-label>
       <ion-input [(ngModel)]="todo.Title"></ion-input>
@@ -25,12 +26,17 @@
       <ion-textarea fz-elastic [(ngModel)]="todo.Desc"></ion-textarea>
   </ion-item>
   <ion-item>
-      <ion-label floating><ion-icon name="folder" style="color:#4989FF;"></ion-icon> Category <span style="color:lightgray">e.g. coding</span></ion-label>
+      <ion-label floating><ion-icon name="folder" style="color:#4989FF;"></ion-icon> Category <span style="color:lightgray">e.g. Coding</span></ion-label>
       <ion-input autocomplete="true" spellcheck="true"  [(ngModel)]="todo.Cat"></ion-input>
   </ion-item>
+  <ion-item no-lines *ngIf="previousCategories.length > 0">
+    <p>Select From Previous Categories:</p>
+    <span *ngFor="let cat of previousCategories">
+      <button ion-button outline style="color:#488AFF;" (click)="selectCat(cat)"><ion-icon name="folder" style="padding:3px"></ion-icon>{{cat}}</button>
+    </span>
+  </ion-item>
 
-
-  <button ion-button block style="margin-top:50px" (click)="createToDo()">Add Task</button>
+  <button ion-button block style="margin-top:25px" (click)="createToDo()">Add Task</button>
 
 
 </ion-content>

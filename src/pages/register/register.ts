@@ -27,15 +27,14 @@ export class RegisterPage {
   async register(user: User){
   try {
       this.test = true;
-      if((this.profile.firstName === undefined || null || 0 === this.profile.firstName.length)
-      || (this.profile.lastName === undefined || null ||  0 === this.profile.lastName.length)){
+      if((this.profile.firstName === undefined || this.profile.firstName.replace(/\s+/g,'') === "" )
+      || (this.profile.lastName === undefined || this.profile.lastName.replace(/\s+/g,'') === "")){
         this.toast.create({
           message: 'All fields are required',
           duration: 2500,
           cssClass: "error"
         }).present();
-          this.test = false;
-        console.log(this.profile.firstName)
+        this.test = false;
      }else{
        const result = await this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password);
        if(result){
@@ -48,7 +47,7 @@ export class RegisterPage {
      }
    }
    catch(e){
-      this.test = false;
+     this.test = false;
      let errorCode = e.code;
       if (errorCode === 'auth/email-already-in-use') {
         this.toast.create({
