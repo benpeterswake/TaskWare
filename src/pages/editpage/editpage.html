@@ -23,6 +23,13 @@
       <ion-input #cat [ngModel]="(todoDataRef$ | async)?.Cat"></ion-input>
   </ion-item>
 
-    <button style="margin-top:50px;" ion-button block (click)="editTodoItem({Title: title.value, Desc: desc.value, Cat: cat.value})">Edit Task</button>
+  <ion-item no-lines *ngIf="previousCategories.length > 0">
+    <p>Select From Previous Categories:</p>
+    <span *ngFor="let cat of previousCategories">
+      <button ion-button outline style="color:#488AFF;" (click)="selectCat(cat)"><ion-icon name="folder" style="padding:3px"></ion-icon>{{cat}}</button>
+    </span>
+  </ion-item>
+
+  <button style="margin-top:25px;" ion-button block (click)="editTodoItem({Title: title.value, Desc: desc.value, Cat: cat.value})">Edit Task</button>
 
 </ion-content>

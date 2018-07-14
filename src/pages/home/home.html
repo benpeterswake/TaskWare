@@ -15,17 +15,17 @@
   </ion-item-divider>
   <ion-list>
       <ion-item no-lines>
+        <ion-avatar item-start *ngIf="loadingImg">
+          <ion-spinner name="bubbles"></ion-spinner>
+        </ion-avatar>
         <ion-avatar item-start *ngIf="image">
           <img [src]="image"/>
         </ion-avatar>
-        <ion-avatar item-start *ngIf="!image">
+        <ion-avatar item-start *ngIf="!image && !loadingImg">
           <img src="https://s3.amazonaws.com/ionic-app-imgs/User_Circle.png"/>
         </ion-avatar>
-
         <h2 style="color:#488AFF;">Welcome</h2>
         <h2 style="text-transform: capitalize">{{(profileData | async)?.firstName}} {{(profileData | async)?.lastName}}</h2>
-
-
       </ion-item>
       <button ion-button block (click)="updateProfile()">
       Account Settings
@@ -37,7 +37,7 @@
     <ion-item no-lines>
          <p style="text-align:center;">You have <span style="color:#488AFF;">{{(todoDataRef$ | async)?.length}}</span> task<span *ngIf="(todoDataRef$ | async)?.length == 0 || (todoDataRef$ | async)?.length > 1">s</span> left!</p>
        <ion-card-content text-wrap>
-          <ion-item *ngIf="(todoDataRef$ | async)?.length==0" style="color:gray; text-align:center;"><ion-icon style="font-size:25px;" name="done-all"></ion-icon> No Tasks</ion-item>
+         <ion-item *ngIf="(todoDataRef$ | async)?.length==0" style="color:gray; text-align:center;"><ion-icon style="font-size:25px;" name="done-all"></ion-icon> No Tasks</ion-item>
          <ion-item *ngFor="let item of todoDataRef$ | async |  slice:0:2; let i=index">
            <h2 style="color:#488aff; font-weight:bold; font-size:18px; text-transform: capitalize;"> {{ item.Title }} </h2>
            <h3  style="font-size:15px; color:#202020">{{ item.Desc }}</h3>

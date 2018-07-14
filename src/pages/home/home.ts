@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Profile } from './../../models/profile';
 import { Todo } from '../../models/todo';
 import { NavController, ToastController } from 'ionic-angular';
@@ -27,12 +27,15 @@ export class HomePage {
   year = this.selectedDay.getFullYear();
   xArray: any[] = [];
   yArray: any[] = [];
+  loadingImg: any;
   //Observables
   profileData: FirebaseObjectObservable<Profile>;
   todoDataRef$: FirebaseListObservable<Todo[]>;
 
   constructor(private afAuth: AngularFireAuth, private toast: ToastController,
     private afDatabase: AngularFireDatabase, public navCtrl: NavController) {
+    this.loadingImg = true;
+
     this.afAuth.authState.take(1).subscribe(auth => {
       //Todo data
       this.todoDataRef$ = this.afDatabase.list(`todo/${auth.uid}`);
@@ -40,7 +43,10 @@ export class HomePage {
       this.profileData = this.afDatabase.object(`profile/${auth.uid}`);
       //Photo Data
       let storageRef = firebase.storage().ref().child(`${auth.uid}/image`);
-      storageRef.getDownloadURL().then(url => this.image = url);
+      storageRef.getDownloadURL().then((url) => {
+        this.image = url;
+        this.loadingImg = false;
+      });
       //Chart Data
       this.items = firebase.database().ref(`completed/${auth.uid}/${this.year}`).orderByKey();
       this.items.on("value", (snapshot) => {
@@ -58,49 +64,45 @@ export class HomePage {
   }
 
   basicChart(dataKey, dataValue){
-      this.lineChart = new Chart(this.lineCanvas.nativeElement, {
-                    type: 'line',
-                    data: {
-                        labels: dataKey,
-                        datasets: [{
-                                label: "Completed",
-                                fill: true,
-                                lineTension: 0.1,
-                                backgroundColor: "rgba(72,138,255,0.4)",
-                                borderColor: "rgba(72,138,255,1)",
-                                borderCapStyle: 'butt',
-                                borderDash: [],
-                                borderDashOffset: 0.0,
-                                borderJoinStyle: 'miter',
-                                pointBorderColor: "rgba(72,138,255,1)",
-                                pointBackgroundColor: "#fff",
-                                pointBorderWidth: 8,
-                                pointHoverRadius: 5,
-                                pointHoverBackgroundColor: "rgba(72,138,255,1)",
-                                pointHoverBorderColor: "rgba(220,220,220,1)",
-                                pointHoverBorderWidth: 2,
-                                pointRadius: 3,
-                                pointHitRadius: 10,
-                                data: dataValue,
-                                spanGaps: false,
-                          }]
-                    },
-                    options : {
-                        scales: {
-                          xAxes: [{
-                            scaleLabel: {
-                              display: true,
-                              labelString: 'Month'
-                            }
-                          }],
-                        }
-                      }
-                });
-                // console.log(this.xArray)
-                // console.log(this.yArray)
-
+    this.lineChart = new Chart(this.lineCanvas.nativeElement, {
+      type: 'line',
+      data: {
+          labels: dataKey,
+          datasets: [{
+                  label: "Completed",
+                  fill: true,
+                  lineTension: 0.1,
+                  backgroundColor: "rgba(72,138,255,0.4)",
+                  borderColor: "rgba(72,138,255,1)",
+                  borderCapStyle: 'butt',
+                  borderDash: [],
+                  borderDashOffset: 0.0,
+                  borderJoinStyle: 'miter',
+                  pointBorderColor: "rgba(72,138,255,1)",
+                  pointBackgroundColor: "#fff",
+                  pointBorderWidth: 8,
+                  pointHoverRadius: 5,
+                  pointHoverBackgroundColor: "rgba(72,138,255,1)",
+                  pointHoverBorderColor: "rgba(220,220,220,1)",
+                  pointHoverBorderWidth: 2,
+                  pointRadius: 3,
+                  pointHitRadius: 10,
+                  data: dataValue,
+                  spanGaps: false,
+            }]
+      },
+      options : {
+          scales: {
+            xAxes: [{
+              scaleLabel: {
+                display: true,
+                labelString: 'Month'
+              }
+            }],
+          }
+        }
+    });
   }
-
 
   switchTabs() {
     this.navCtrl.parent.select(1);
