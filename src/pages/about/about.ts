@@ -1,6 +1,6 @@
 
-import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController, ActionSheetController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, NavParams, ToastController, Content, ActionSheetController } from 'ionic-angular';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Todo } from './../../models/todo';
@@ -15,7 +15,7 @@ import * as firebase from 'firebase/app';
 })
 
 export class AboutPage{
-
+  @ViewChild(Content) content: Content;
   todoDataRef$: FirebaseListObservable<Todo[]>;
   todo = {} as Todo;
   completed = 0;
@@ -91,6 +91,7 @@ export class AboutPage{
           if(snapshot.val().Cat === cat){
             this.catergorized.push(snapshot.val())
           }
+          this.content.scrollToTop(400);
         });
         return this.catergorized;
       }
