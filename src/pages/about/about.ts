@@ -62,21 +62,21 @@ export class AboutPage{
             }
           }
         },
-            {
-              text: 'Edit',
-              cssClass: "edit",
-              handler: () =>{
-               this.navCtrl.push(EditpagePage, {todoId: todo.$key});
-              }
-          },
+        {
+          text: 'Edit',
+          cssClass: "edit",
+          handler: () =>{
+           this.navCtrl.push(EditpagePage, {todoId: todo.$key});
+          }
+        },
 
-            {
-              text: 'Cancel',
-              role: 'cancel',
-              handler: () =>{
-               console.log("Canceled");
-                }
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () =>{
+           console.log("Canceled");
             }
+        }
         ]
       }).present();
     }

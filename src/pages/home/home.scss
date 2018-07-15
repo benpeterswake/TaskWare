@@ -23,7 +23,7 @@
 .ios{
 
   page-home {
-      .scroll-content {
+    .scroll-content {
       background-color: map-get($colors, light);
     }
     .pad{
@@ -32,12 +32,12 @@
 
   }
 
-        ion-item-divider{
-            background-color: white;
-            border-bottom: 1px solid lightgray;
-            color:gray;
-            font-size:14px;
-        }
+  ion-item-divider{
+      background-color: white;
+      border-bottom: 1px solid lightgray;
+      color:gray;
+      font-size:14px;
+  }
 
 
 }
