@@ -39,46 +39,57 @@ export class AboutPage{
     }
 
     selectTodoItem(todo: Todo){
-      this.actionSheetCtrl.create({
-        title: `${todo.Title}`,
-        buttons: [
-        {
-          text: 'Mark As Completed',
-          role: 'destructive',
-          cssClass: "completed",
-          handler: () =>{
-           this.todoDataRef$.remove(todo.$key);
-            if (this.todoDataRef$.remove(todo.$key)){
-              this.afAuth.authState.take(1).subscribe(auth => {
-                  this.afDatabase.object(`completed/${auth.uid}/${this.year}/${this.monthFormat}`).$ref
-                  .ref.transaction(completed => {
-                      if (completed === null) {
-                          return completed = 1;
-                      } else {
-                          return completed + 1;
-                      }
-                  });
-              });
-            }
-          }
-        },
-            {
-              text: 'Edit',
-              cssClass: "edit",
-              handler: () =>{
-               this.navCtrl.push(EditpagePage, {todoId: todo.$key});
-              }
-          },
-
-            {
-              text: 'Cancel',
-              role: 'cancel',
-              handler: () =>{
-               console.log("Canceled");
-                }
-            }
-        ]
-      }).present();
+      this.afAuth.authState.take(1).subscribe(auth => {
+        if(todo.Completed === true){
+          firebase.database().ref(`todo/${auth.uid}/${todo.$key}`).update({
+            Completed: false
+          })
+        }else{
+          firebase.database().ref(`todo/${auth.uid}/${todo.$key}`).update({
+            Completed: true
+          })
+        }
+      });
+      // this.actionSheetCtrl.create({
+      //   title: `${todo.Title}`,
+      //   buttons: [
+      //   {
+      //     text: 'Mark As Completed',
+      //     role: 'destructive',
+      //     cssClass: "completed",
+      //     handler: () =>{
+      //      this.todoDataRef$.remove(todo.$key);
+      //       if (this.todoDataRef$.remove(todo.$key)){
+      //         this.afAuth.authState.take(1).subscribe(auth => {
+      //             this.afDatabase.object(`completed/${auth.uid}/${this.year}/${this.monthFormat}`).$ref
+      //             .ref.transaction(completed => {
+      //                 if (completed === null) {
+      //                     return completed = 1;
+      //                 } else {
+      //                     return completed + 1;
+      //                 }
+      //             });
+      //         });
+      //       }
+      //     }
+      //   },
+      //       {
+      //         text: 'Edit',
+      //         cssClass: "edit",
+      //         handler: () =>{
+      //          this.navCtrl.push(EditpagePage, {todoId: todo.$key});
+      //         }
+      //     },
+      //
+      //       {
+      //         text: 'Cancel',
+      //         role: 'cancel',
+      //         handler: () =>{
+      //          console.log("Canceled");
+      //           }
+      //       }
+      //   ]
+      // }).present();
     }
 
     sortByCategory(cat){

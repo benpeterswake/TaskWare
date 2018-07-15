@@ -3,5 +3,5 @@ export interface Todo{
   Title: string;
   Desc: string;
   Cat: string;
-  Date: string;
+  Completed: Boolean;
 }

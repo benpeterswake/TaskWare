@@ -28,12 +28,14 @@
        <ion-item *ngIf="(todoDataRef$ | async)?.length==0" style="color:white; text-align:center; background-color:lightgray;">No tasks..</ion-item>
        <!-- If not catergory -->
        <div *ngIf="!catergorized">
-             <ion-item *ngFor="let item of todoDataRef$ | async" text-wrap no-lines>
-                 <ion-icon (click)="selectTodoItem(item)" name="radio-button-off" item-start></ion-icon>
-                 <h2 (click)="selectTodoItem(item)" style="color:#488aff; font-weight:bold; font-size:18px; text-transform: capitalize;">{{item.Title}}</h2>
-                 <h3 (click)="selectTodoItem(item)" style="font-size:15px;">{{item.Desc}}</h3>
-                 <span *ngIf="(item.Cat)?.length != null"><button ion-button outline style="color:#488AFF;" (click)="sortByCategory(item.Cat)"><ion-icon name="folder" style="padding:3px"></ion-icon>{{item.Cat}}</button></span>
-             </ion-item>
+         <ion-item *ngFor="let item of todoDataRef$ | async" text-wrap no-lines>
+           <ion-label>
+              <h2 style="color:#488aff; font-weight:bold; font-size:18px; text-transform: capitalize;">{{item.Title}}</h2>
+              <h3 style="font-size:15px;">{{item.Desc}}</h3>
+              <span *ngIf="(item.Cat)?.length != null"><button ion-button small outline style="color:#488AFF;" (click)="sortByCategory(item.Cat)"><ion-icon name="folder" style="padding:3px"></ion-icon>{{item.Cat}}</button></span>
+            </ion-label>
+           <ion-checkbox (click)="selectTodoItem(item)" [ngModel]="item.Completed"></ion-checkbox>
+         </ion-item>
        </div>
        <!-- If catergory -->
        <div *ngIf="catergorized">
@@ -42,10 +44,12 @@
           <button ion-button icon-end (click)="removeCategory()">{{cat}} <ion-icon name="close"></ion-icon></button>
         </ion-item>
          <ion-item *ngFor="let item of catergorized"  text-wrap no-lines>
-           <ion-icon (click)="selectTodoItem(item)" name="radio-button-off" item-start></ion-icon>
-             <h2 (click)="selectTodoItem(item)" style="color:#488aff; font-weight:bold; font-size:18px; text-transform: capitalize;">{{item.Title}}</h2>
-             <h3 (click)="selectTodoItem(item)" style="font-size:15px;">{{item.Desc}}</h3>
-             <span *ngIf="(item.Cat)?.length != null"><button ion-button outline style="color:#488AFF;" (click)="sortByCategory(item.Cat)"><ion-icon name="folder" style="padding:3px"></ion-icon>{{item.Cat}}</button></span>
+           <ion-label>
+              <h2 style="color:#488aff; font-weight:bold; font-size:18px; text-transform: capitalize;">{{item.Title}}</h2>
+              <h3 style="font-size:15px;">{{item.Desc}}</h3>
+              <span *ngIf="(item.Cat)?.length != null"><button ion-button small outline style="color:#488AFF;" (click)="sortByCategory(item.Cat)"><ion-icon name="folder" style="padding:3px"></ion-icon>{{item.Cat}}</button></span>
+            </ion-label>
+           <ion-checkbox (click)="selectTodoItem(item)" [ngModel]="item.Completed"></ion-checkbox>
          </ion-item>
        </div>
        <button ion-button clear full (click)="addtodo()" style="margin-top:30px;">+ ADD TASK</button>
