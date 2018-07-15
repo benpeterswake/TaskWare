@@ -42,34 +42,51 @@
 
   <button ion-button block (click)="createProfile({firstName: firstname.value, lastName: lastname.value})" style="margin-top:15px;">Update Profile</button>
 
-  <ion-item-divider style="margin-top:25px">ABOUT</ion-item-divider>
+  <ion-item-divider style="margin-top:25px">YOUR ACCOUNT ADMIN</ion-item-divider>
+  <ion-list>
 
-<ion-list>
+    <ion-list>
+        <ion-item no-lines>
+          <div *ngIf="true">
+            <button ion-button>Connect Your Account</button>
+          </div>
+          <div *ngIf="false">
+            <ion-avatar item-start>
+              <img src="https://s3.amazonaws.com/ionic-app-imgs/User_Circle.png"/>
+            </ion-avatar>
+            <h2 style="color:#488AFF;">Admin Title</h2>
+            <h2 style="text-transform: capitalize">Admin Name</h2>
+          </div>
+        </ion-item>
+    </ion-list>
 
+  </ion-list>
 
-    <ion-item (click)="toPrivacyPage()">
-          Privacy Policy
-    <ion-icon item-right icon-only name="arrow-dropright"></ion-icon>
-    </ion-item>
-     <a style="text-decoration:none; color:gray;" href="#" onclick="window.open('https://d3kbsxvq7os3rv.cloudfront.net/', '_system', 'location=yes'); return false;">
-    <ion-item >
+  <ion-item-divider style="margin-top:25px">ABOUT TASKWARE</ion-item-divider>
 
-        Developer Website
-    <ion-icon item-right icon-only name="arrow-dropright"></ion-icon>
-    </ion-item>
-    </a>
+  <ion-list>
 
-    <ion-item no-lines style="padding-bottom:20px;">
-    Version
-    <p item-right>0.0.4</p>
-    </ion-item>
+      <ion-item (click)="toPrivacyPage()">
+            Privacy Policy
+      <ion-icon item-right icon-only name="arrow-dropright"></ion-icon>
+      </ion-item>
+       <a style="text-decoration:none; color:gray;" href="#" onclick="window.open('https://d3kbsxvq7os3rv.cloudfront.net/', '_system', 'location=yes'); return false;">
+      <ion-item >
 
-    <button  ion-button block (click)="signOut()">
-      Logout
-    </button>
+          Developer Website
+      <ion-icon item-right icon-only name="arrow-dropright"></ion-icon>
+      </ion-item>
+      </a>
 
+      <ion-item no-lines style="padding-bottom:20px;">
+      Version
+      <p item-right>0.0.4</p>
+      </ion-item>
 
+      <button  ion-button block color="danger" (click)="signOut()">
+        Logout
+      </button>
 
-</ion-list>
+  </ion-list>
 
 </ion-content>
