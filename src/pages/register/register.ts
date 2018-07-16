@@ -25,6 +25,7 @@ export class RegisterPage {
   }
 
   async register(user: User){
+    this.profile.admin = false;
   try {
       this.test = true;
       if((this.profile.firstName === undefined || this.profile.firstName.replace(/\s+/g,'') === "" )

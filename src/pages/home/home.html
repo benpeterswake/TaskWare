@@ -15,14 +15,11 @@
   </ion-item-divider>
   <ion-list>
       <ion-item no-lines>
-        <ion-avatar item-start *ngIf="loadingImg">
-          <ion-spinner name="bubbles"></ion-spinner>
+        <ion-avatar item-start *ngIf="!image">
+          <img src="https://s3.amazonaws.com/ionic-app-imgs/User_Circle.png"/>
         </ion-avatar>
         <ion-avatar item-start *ngIf="image">
           <img [src]="image"/>
-        </ion-avatar>
-        <ion-avatar item-start *ngIf="!image && !loadingImg">
-          <img src="https://s3.amazonaws.com/ionic-app-imgs/User_Circle.png"/>
         </ion-avatar>
         <h2 style="color:#488AFF;">Welcome</h2>
         <h2 style="text-transform: capitalize">{{(profileData | async)?.firstName}} {{(profileData | async)?.lastName}}</h2>
